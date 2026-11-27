@@ -10,8 +10,8 @@ import org.sequeless.spi.object.BusinessObject;
  * Computes a {@code sq:Plugin}-derived property's value for a batch of objects, named by {@link
  * #name()} and matched against a type's {@code sq:pluginName}. This is itself the {@link
  * java.util.ServiceLoader} service type adapters register under {@code
- * META-INF/services/org.sequeless.store.spi.DerivationPlugin} — unlike {@link
- * org.sequeless.spi.AdapterDescriptorProvider}, which exists only as an indirection because {@link
+ * META-INF/services/org.sequeless.store.spi.DerivationPlugin} — unlike {@code
+ * org.sequeless.spi.AdapterDescriptorProvider}, which exists only as an indirection because {@code
  * org.sequeless.spi.AdapterDescriptor} is a record and {@code ServiceLoader} cannot instantiate a
  * record reflectively. A {@link DerivationPlugin} implementation is an ordinary class with a no-arg
  * constructor, so it can be the service type directly; there is no analogous reason to add a
