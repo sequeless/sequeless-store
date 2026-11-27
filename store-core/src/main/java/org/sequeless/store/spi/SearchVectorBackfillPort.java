@@ -4,7 +4,7 @@ import org.sequeless.kernel.identity.Scope;
 
 /**
  * The outbound port that recomputes the full-text search data of every stored object of a tenant,
- * from that tenant's current searchable-property registry. The host calls it after {@link
+ * from that tenant's current searchable-property registry. The host calls it after {@code
  * org.sequeless.spi.query.IndexPreparationPort#prepare} reports that it registered a new searchable
  * property, so that the objects stored before the registration become searchable.
  *
