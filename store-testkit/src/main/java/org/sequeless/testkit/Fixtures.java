@@ -182,7 +182,7 @@ public final class Fixtures {
      * #deliverable()}); properties list is every inherited property plus Project's own {@code
      * hasTask, openTaskCount, totalEstimatedHours}, seven in total. The latter two are {@code
      * readOnly}, and their {@code sq:Rollup} rules are held by {@link org.sequeless.testkit.query.QueryFixtures#behaviour()}, matching the
-     * exact {@link RollupRule} shape {@code SnapshotMapper} produces from {@code reference.ttl}.
+     * exact {@link org.sequeless.ontology.behaviour.api.RollupRule} shape {@code SnapshotMapper} produces from {@code reference.ttl}.
      */
     public static TypeDefinition project() {
         return new TypeDefinition(

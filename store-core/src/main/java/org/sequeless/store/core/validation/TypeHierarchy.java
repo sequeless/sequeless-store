@@ -88,7 +88,7 @@ public final class TypeHierarchy {
     }
 
     /**
-     * The narrower, concrete-only counterpart to {@link #typeAndSubtypes}: a {@link
+     * The narrower, concrete-only counterpart to {@link #typeAndSubtypes}: a {@code
      * org.sequeless.spi.query.Query#types()} must never contain an abstract type IRI (the query port
      * never does hierarchy reasoning and never sees one), so {@code
      * DefaultObjectQueryService#browse} resolves against this set rather than {@link
