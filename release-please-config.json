@@ -5,6 +5,7 @@
   "plugins": [{ "type": "maven-workspace" }],
   "packages": {
     "store-core": { "component": "store-core", "initial-version": "0.1.0", "skip-snapshot": true },
-    "store-testkit": { "component": "store-testkit", "initial-version": "0.1.0", "skip-snapshot": true }
+    "store-testkit": { "component": "store-testkit", "initial-version": "0.1.0", "skip-snapshot": true },
+    "store-postgres-jsonb-adapter": { "component": "store-postgres-jsonb-adapter", "initial-version": "0.1.0", "skip-snapshot": true }
   }
 }
