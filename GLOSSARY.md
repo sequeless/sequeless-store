@@ -1,4 +1,4 @@
 # Glossary
 
-Domain terms for this repo. The template ships it empty; add terms as the domain takes shape
+Domain terms for this repo. Add terms as the domain takes shape
 (see docs/agents/domain.md).

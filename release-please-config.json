@@ -4,6 +4,7 @@
   "include-component-in-tag": true,
   "plugins": [{ "type": "maven-workspace" }],
   "packages": {
-    "template-core": { "component": "template-core", "initial-version": "0.1.0" }
+    "store-core": { "component": "store-core", "initial-version": "0.1.0", "skip-snapshot": true },
+    "store-testkit": { "component": "store-testkit", "initial-version": "0.1.0", "skip-snapshot": true }
   }
 }
