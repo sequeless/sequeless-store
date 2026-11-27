@@ -1,6 +1,4 @@
 /**
- * Placeholder for the store core. The module carries no types until the store moves in with its
- * code (spec 18, unit U8). This file gives CodeQL Java to extract, so the analyze check runs on an
- * empty module.
+ * Placeholder for the store core. The module carries no types until the store's code moves in.
  */
 package org.sequeless.store.core;
