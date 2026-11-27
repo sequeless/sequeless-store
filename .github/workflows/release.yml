@@ -3,14 +3,6 @@ name: Release
 on:
   push:
     branches: [main]
-  # Temporary manual deploy of the 0.1.0 tags, for the owner's route decision. Remove this trigger
-  # and the deploy-tag job once the 0.1.0 artifacts are verified on GitHub Packages.
-  workflow_dispatch:
-    inputs:
-      deploy-tag:
-        description: Tag to deploy. Only store-core-v0.1.0, store-testkit-v0.1.0 or store-postgres-jsonb-adapter-v0.1.0 is accepted, and only that module is deployed.
-        required: true
-        type: string
 
 permissions:
   contents: write
@@ -19,48 +11,5 @@ permissions:
 
 jobs:
   release:
-    if: github.event_name == 'push'
     uses: sequeless/sequeless-build/.github/workflows/maven-release.yml@8cebaa03c8ba188b31f6c0c7b4c4bb0e2c9dacd2 # workflows-v0.1.3
     secrets: inherit
-
-  deploy-tag:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      # The tag names a fixed module, so nothing from the input reaches a shell command.
-      - name: Check the tag names a store module at 0.1.0
-        id: module
-        env:
-          TAG: ${{ inputs.deploy-tag }}
-        run: |
-          case "$TAG" in
-            store-core-v0.1.0) MODULE=store-core ;;
-            store-testkit-v0.1.0) MODULE=store-testkit ;;
-            store-postgres-jsonb-adapter-v0.1.0) MODULE=store-postgres-jsonb-adapter ;;
-            *) echo "Refusing to deploy $TAG: only the three store 0.1.0 tags are deployed here."; exit 1 ;;
-          esac
-          echo "module=$MODULE" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: refs/tags/${{ inputs.deploy-tag }}
-      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6
-        with:
-          distribution: temurin
-          java-version: '25'
-          cache: maven
-          server-id: github
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-      # Same two steps as the release job: install builds the upstreams locally, then deploy is targeted.
-      - name: Build the module and its upstreams
-        env:
-          MAVEN_USERNAME: ${{ github.actor }}
-          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          MODULE: ${{ steps.module.outputs.module }}
-        run: mvn -B -ntp -Prelease -pl "$MODULE" -am install -DskipTests
-      - name: Deploy the module at the tag
-        env:
-          MAVEN_USERNAME: ${{ github.actor }}
-          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-          MODULE: ${{ steps.module.outputs.module }}
-        run: mvn -B -ntp -Prelease -pl "$MODULE" deploy -DskipTests
