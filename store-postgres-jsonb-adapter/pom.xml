@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Pinned to a released sequeless-build-parent. Renovate bumps it. -->
+  <parent>
+    <groupId>org.sequeless</groupId>
+    <artifactId>sequeless-build-parent</artifactId>
+    <version>0.1.3</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>org.sequeless</groupId>
+  <artifactId>store-postgres-jsonb-adapter</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>store-postgres-jsonb-adapter</name>
+  <description>Command-side Postgres adapter: JSONB object storage, the transactional outbox, the Command migrations V1 to V12 (the published table contract, including sq_ontology_document) and the store's search-vector trigger. Plain classes; the Spring autoconfiguration stays in the host.</description>
+
+  <properties>
+    <!-- The deploy URL is built from this name; it must name this repository (the parent defaults to sequeless-build). -->
+    <sequeless.github.repository>sequeless-store</sequeless.github.repository>
+    <!-- Matches the other Sequeless library modules: JDK 25. -->
+    <maven.compiler.release>25</maven.compiler.release>
+    <!-- Published: the BOM resolves it. Released by release-please, first at 0.1.0. -->
+    <maven.deploy.skip>false</maven.deploy.skip>
+    <junit.version>6.1.3</junit.version>
+    <spring-boot.version>4.1.1</spring-boot.version>
+    <sequeless-bom.version>0.3.2</sequeless-bom.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- Spring JDBC, Spring TX, Flyway, the Postgres driver, Testcontainers and Jackson 3 versions come from the Spring Boot BOM. -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.sequeless</groupId>
+        <artifactId>sequeless-bom</artifactId>
+        <version>${sequeless-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>store-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>kernel-identity</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>kernel-values</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>ontology-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>schema-contract</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>automation-contract</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- This adapter's own Flyway.configure() needs the driver on its runtime classpath. -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Jackson 3 (tools.jackson): ValueJsonCodec and the outbox payload codec. -->
+    <dependency>
+      <groupId>tools.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>store-testkit</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sequeless</groupId>
+      <artifactId>ontology-testfixtures</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers-postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/sequeless/*</url>
+    </repository>
+  </repositories>
+</project>
