@@ -23,6 +23,7 @@
   <modules>
     <module>store-core</module>
     <module>store-testkit</module>
+    <module>store-postgres-jsonb-adapter</module>
   </modules>
 
   <repositories>
