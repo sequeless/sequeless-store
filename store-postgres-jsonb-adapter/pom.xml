@@ -12,7 +12,7 @@
 
   <groupId>org.sequeless</groupId>
   <artifactId>store-postgres-jsonb-adapter</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>0.1.0</version>
   <name>store-postgres-jsonb-adapter</name>
   <description>Command-side Postgres adapter: JSONB object storage, the transactional outbox, the Command migrations V1 to V12 (the published table contract, including sq_ontology_document) and the store's search-vector trigger. Plain classes; the Spring autoconfiguration stays in the host.</description>
 
@@ -59,7 +59,7 @@
     <dependency>
       <groupId>org.sequeless</groupId>
       <artifactId>store-core</artifactId>
-      <version>${project.version}</version>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.sequeless</groupId>
@@ -112,7 +112,7 @@
     <dependency>
       <groupId>org.sequeless</groupId>
       <artifactId>store-testkit</artifactId>
-      <version>${project.version}</version>
+      <version>0.1.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
