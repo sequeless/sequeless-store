@@ -6,9 +6,12 @@ through the Sequeless BOM.
 
 Modules:
 
-- `store-core`: the store's ports and model. No Spring, no Postgres.
-- `store-testkit`: in-memory doubles and the contract tests for the store.
-- `store-postgres-jsonb-adapter`: arrives with its code (spec 18, unit U8).
+- `store-core`: the store's ports, value types and Command use cases. No Spring, no Postgres.
+- `store-testkit`: in-memory doubles, the reference-domain fixtures and the contract tests for the store. No Spring.
+- `store-postgres-jsonb-adapter`: the Command-side Postgres adapter and the Command migrations V1 to V12, which are the
+  published table contract (see `docs/table-contract.md`). Its integration tests need Docker for Testcontainers.
+
+`PROVENANCE.md` records the copy from `sequeless-prototype` (import SHA `429b2de`).
 
 The extraction plan is in `docs/extraction` in the prototype repo.
 
