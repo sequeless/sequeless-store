@@ -36,9 +36,11 @@ Tests follow their sources into the matching `src/test` trees.
 Everything in the copy is the import SHA's content, except the following. Each change is listed so that a diff against
 `429b2de` shows nothing else.
 
-1. **Javadoc-only imports.** `store.spi.Criterion`, `store.spi.AggregateRequest` and `store.spi.QueryPort` imported
-   `org.sequeless.spi.query` types only for javadoc links. The query package stays in the host (spec Q18), so the
-   imports are removed and the links are `{@code ...}`.
+1. **Javadoc-only references to host types.** `store.spi.Criterion`, `store.spi.AggregateRequest` and `store.spi.QueryPort`
+   imported `org.sequeless.spi.query` types only for javadoc links. The query package stays in the host (spec Q18), so
+   those imports are removed. The same holds for the javadoc links in `store.spi.DerivationPlugin` (to the host's
+   `AdapterDescriptor` types), in `spi.object.Page` (to `BrowsePort`) and in the testkit's query `package-info` (to
+   `org.sequeless.spi.query`). Each link is now `{@code ...}`.
 2. **Placeholders removed.** The scaffold's `BoundaryRulesTest` and `org/sequeless/store/testkit/package-info.java`
    are deleted. The scaffold's `package-info.java` files in `store.api`, `store.spi` and `store.core` are replaced by the
    copied ones.
@@ -69,8 +71,9 @@ Everything in the copy is the import SHA's content, except the following. Each c
   but store-core's test cannot see the adapter classes, so the rule cannot run there. It is not carried in U8. The host's
   `ArchitectureTest` keeps the rule, and it applies to these classes once they are on the host's classpath (U11). Whether
   to add it to this repository is an open placement question for the Navigator, because spec G3 places the store rules in store-core.
-- **Stale javadoc in the copy.** Some copied javadoc still names the prototype host's `sequeless-app` ArchUnit rules and
-  says the `bannedDependencies` rule is in the module POM. The rule now comes from the parent POM through
+- **Stale javadoc in the copy.** Some copied javadoc still names the prototype host's `sequeless-app` ArchUnit rules, names
+  `PostgresPersistenceAutoConfiguration` as work that "lands in" a later unit (in `store.postgres`'s `package-info`), and says
+  the `bannedDependencies` rule is in the module POM. The rule now comes from the parent POM through
   `sequeless.enforcer.core.skip`. The copy keeps these lines, as a pure copy must. A follow-up may correct them.
 - **Classpath condition for the default migrate.** `PostgresMigrations.migrate(DataSource)` runs the Query set from the
   classpath. In this repository that path is exercised by nothing, because the tests use the command-only hook. The host

@@ -1,5 +1,5 @@
 /**
- * The mechanical contract tests for the query ports in {@link org.sequeless.spi.query}.
+ * The mechanical contract tests for the query ports in {@code org.sequeless.spi.query}.
  *
  * <p>The browse and read contracts left this package with the U6 split: they now live in the
  * released {@code query-testkit} artifact. {@code ReadContract} asserted every clause of
