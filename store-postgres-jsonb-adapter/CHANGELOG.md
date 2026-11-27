@@ -1,5 +1,9 @@
 # Changelog
 
+* The following workspace dependencies were updated
+    * org.sequeless:store-core bumped to 0.1.1,
+    * org.sequeless:store-testkit bumped to 0.1.1
+
 ## 0.1.0 (2026-11-27)
 
 

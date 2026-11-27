@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.1](https://github.com/sequeless/sequeless-store/compare/store-testkit-v0.1.0...store-testkit-v0.1.1) (2026-11-27)
+
+
+### Documentation
+
+* fix unresolved javadoc links (Refs sequeless/sequeless-prototype[#46](https://github.com/sequeless/sequeless-store/issues/46)) ([d8edf03](https://github.com/sequeless/sequeless-store/commit/d8edf035a6a3effb8cc2c08dd083fa099db11263))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+    * org.sequeless:store-core bumped to 0.1.1
+
 ## 0.1.0 (2026-11-27)
 
 
