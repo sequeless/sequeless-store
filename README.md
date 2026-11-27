@@ -1,26 +1,25 @@
-# sequeless-template
+# sequeless-store
 
-The starting point for a new Sequeless repo. It is a GitHub template repository: copy it with
-"Use this template", then run the init script once in the new repo:
+The command side store of a Sequeless host: object state, outbox, validation, derivation and the
+Postgres adapter for them. It is published from this repository, and the prototype consumes it
+through the Sequeless BOM.
+
+Modules:
+
+- `store-core`: the store's ports and model. No Spring, no Postgres.
+- `store-testkit`: in-memory doubles and the contract tests for the store.
+- `store-postgres-jsonb-adapter`: arrives with its code (spec 18, unit U8).
+
+The extraction plan is in `docs/extraction` in the prototype repo.
+
+## Build
 
 ```bash
-make init name=<repo-name>            # or: scripts/init-repo.sh <repo-name> [--github]
+make verify        # or: ./mvnw -B verify
 ```
 
-The init script renames the placeholders (`template-core`, `org.sequeless.template`,
-`sequeless-template`), resets PROVENANCE.md and removes itself.
-
-## What the template gives a repo
-
-- Maven wrapper, Makefile (`make verify`, `make fmt`, `make new-adr`), devcontainer on JDK 25.
-- A parent POM from `sequeless-build` and reusable CI, CodeQL, Sonar and release workflows.
-- release-please in manifest mode, with per-module versions and 0.1.0 as the first version.
-- A canonical `BoundaryRulesTest` for the module layers (api, spi, internal).
-- A commitlint PR-title check and the agent docs under `docs/agents/`.
-
-The parent POM (`sequeless-build-parent` 0.1.3) and the reusable workflows (`workflows-v0.1.2`)
+The parent POM (`sequeless-build-parent` 0.1.3) and the reusable workflows (`workflows-v0.1.3`)
 come from released `sequeless-build` versions, and CI runs against them. Renovate moves both.
-The extraction plan is in `docs/extraction` in the prototype repo.
 
 ## Local setup
 
@@ -31,4 +30,7 @@ as `<password>${env.GITHUB_PACKAGES_TOKEN}</password>`; `sequeless-build`'s READ
 If `spotless:check` fails at `verify`, run `mvn spotless:apply`, then `mvn verify` again. The parent
 rejects a POM that is valid XML but not in the formatter's layout.
 
-SonarCloud is optional: the workflow skips with a notice when `SONAR_TOKEN` is absent.
+## Release
+
+release-please runs in manifest mode with one config for the store modules, first version 0.1.0.
+The release PRs are release-please PRs in this repository.
